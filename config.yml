@@ -1,0 +1,34 @@
+baseURL: http://postigo.fyi/
+languageCode: en-us
+title: postigo.fyi
+theme: PaperMod
+
+menu:
+  main:
+      - identifier: boo
+        name: 404
+        url: /boo/
+        weight: 10
+
+enableEmoji: true
+
+params:
+  cover:
+    hiddenInList: true
+    hiddenInSingle: false
+
+  showReadingTime: true
+  showShareButtons: true
+
+  homeInfoParams:
+    imageUrl: images/me.jpeg
+    imageTitle: me
+    title: ":cooking: kenneth postigo"
+    content: |
+      I'm a hardware and software engineer by profession, with deep interests in food, music, fashion, and design overall.  
+
+  socialIcons:
+    - name: github
+      url: https://github.com/kpostigo
+    - name: twitter
+      url: https://twitter.com/postigo_txt
