@@ -23,9 +23,9 @@ params:
   homeInfoParams:
     imageUrl: images/me.jpeg
     imageTitle: me
-    title: ":cooking: kenneth postigo"
+    title: ":cooking: Kenneth Postigo"
     content: |
-      I'm a hardware and software engineer by profession, with deep interests in food, music, fashion, and design overall.  
+      hardware and software engineer by profession. deep interests in finance, food, fashion, music, and design over all.  
 
   socialIcons:
     - name: github
