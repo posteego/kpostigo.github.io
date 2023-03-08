@@ -25,7 +25,8 @@ params:
     imageTitle: me
     title: ":cooking: Kenneth Postigo"
     content: |
-      hardware and software engineer by profession. deep interests in finance, food, fashion, music, and design over all.  
+      hardware and software engineer by profession.
+      deep interests in finance, food, fashion, music, and design over all.  
 
   socialIcons:
     - name: github
