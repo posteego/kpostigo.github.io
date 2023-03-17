@@ -4,21 +4,25 @@ title: postigo.fyi
 theme: PaperMod
 
 menu:
-  main:
-      - identifier: boo
-        name: 404
-        url: /boo/
-        weight: 10
+#   main:
+#       - identifier: boo
+#         name: 404
+#         url: /boo/
+#         weight: 10
 
 enableEmoji: true
 
 params:
+  defaultTheme: light
+  disableThemeToggle: true
+
   cover:
     hiddenInList: true
     hiddenInSingle: false
 
   showReadingTime: true
   showShareButtons: true
+  showToc: true
 
   homeInfoParams:
     imageUrl: images/me.jpeg
