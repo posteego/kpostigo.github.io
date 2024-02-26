@@ -22,9 +22,10 @@ params:
 
   showReadingTime: true
   showShareButtons: true
-  ShareButtons:
-    twitter: false
-    linkedin: false
+  custom:
+    ShareButtons:
+      twitter: false
+      linkedin: false
   showToc: true
 
   homeInfoParams:
