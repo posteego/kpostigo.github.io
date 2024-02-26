@@ -22,7 +22,7 @@ params:
 
   showReadingTime: true
   showShareButtons: true
-  showShareButtons:
+  ShareButtons:
     twitter: false
     linkedin: false
   showToc: true
