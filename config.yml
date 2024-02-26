@@ -22,6 +22,9 @@ params:
 
   showReadingTime: true
   showShareButtons: true
+  showShareButtons:
+    twitter: false
+    linkedin: false
   showToc: true
 
   homeInfoParams:
@@ -29,9 +32,9 @@ params:
     imageTitle: me
     title: ":cooking: Kenneth Postigo"
     content: |
-      hardware and software engineer by profession.
+      hardware & software engineer
 
-      passionate about finance, food, fashion, music, and design over all.  
+      passionate about finance, food, fashion, music, and design.
 
   socialIcons:
     - name: github
