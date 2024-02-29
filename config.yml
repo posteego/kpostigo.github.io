@@ -21,11 +21,7 @@ params:
     hiddenInSingle: false
 
   showReadingTime: true
-  showShareButtons: true
-  custom:
-    ShareButtons:
-      twitter: false
-      linkedin: false
+  showShareButtons: false
   showToc: true
 
   homeInfoParams:
