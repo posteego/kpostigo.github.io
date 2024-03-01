@@ -1,8 +1,8 @@
 ---
 title: "Renaming, Reanimated"
 summary: Renaming MusicShare and implementing Reanimated 3
-date: 2024-02-26
-draft: true
+date: 2024-03-01
+draft: false
 tags: ["MusicShare", "BeatBridge",]
 hidemeta: false
 disableShare: false
@@ -29,7 +29,7 @@ I don't use GPT language models to help me code as much anymore because I notice
 
 That being said, I use AI to generate images almost every day. Since the instructions to my app are pretty basic, adding an image to the pre-result screen would give it a better look. I used Midjourney to create an image of a few musical elements and added it to my screen. The result:
 
-![instructions-preview](images/instructions-preview.png)
+![instructions-preview](assets/instructions-preview.png)
 
 ## Getting Started with Reanimated 3
 
@@ -37,3 +37,45 @@ I have a little experience with Reanimated 2 from previous jobs, but I never ins
 
 The goal for this app is to be as easy and quick to use as possible. That being said, I don't want the app to look *too* basic. Having a simple loading animation along with a toast to pop up whenever a link is tapped are great touches to give users feedback on what the app is doing.
 
+I also added an error pop up in case someone pastes a link that the service can't recognize.  Below is a demo of the app in use.
+
+![BeatBridge demo](assets/beatbridge_demo.GIF)
+
+```jsx
+// simplified for context
+const Loading = () => {
+  // set shared value for Reanimated to use
+  const opacity = useSharedValue(0);
+
+  // animation control
+  useEffect(() => {
+    // withRepeat + withString are from the 'react-native-reanimated' lib
+    opacity.value = withRepeat(withSpring(1), 0, true);
+  }, []);
+
+  return (
+    // Animated.View is a Reanimated component
+    <Animated.View style={{ opacity: opacity }}>
+      <FastImage
+        source={require('assets/image.png')}
+        style={styles.loadingImage}
+      />
+      <Text style={styles.mainText}>Fetching link information</Text>
+    </Animated.View>
+  );
+};
+```
+
+In order to make the loading animation, I set a shared value that Reanimated can recognize for the opacity of the entire `Animated.View` component with `const opacity = useSharedValue(0)`. This allowed me to animate the view within the `useEffect()` method with `withRepeat` and `withSpring` for a repeating fade in and out.
+
+## Next Steps
+
+Since the app has been available for testing for the past few days, user feedback has shown me that I was building this app with bias towards the user that wants to **send** a music link to someone else.
+
+In order to make up for that, I need to implement a feature that helps a user that receives a music link from a platform that they don't use.
+
+### New feature
+
+The upcoming feature for BeatBridge Beta v3 is the ability to paste a music link and be forwarded to the music platfrom of your choice for easy listening.
+
+Thanks for following along with BeatBridge!
