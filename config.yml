@@ -35,6 +35,6 @@ params:
 
   socialIcons:
     - name: github
-      url: https://github.com/kpostigo
+      url: https://github.com/yieldsimp
     - name: twitter
       url: https://twitter.com/postigo_txt
