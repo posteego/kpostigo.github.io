@@ -33,7 +33,7 @@ That being said, I use AI to generate images almost every day. Since the instruc
 
 ## Getting Started with Reanimated 3
 
-I have a little experience with Reanimated 2 from previous jobs, but I never installed the library myself. A simple `yarn add react-native-reanimated` from the project folder and `pod install` inside the `ios` folder and Reanimated was ready to use.
+I have a little experience with Reanimated 2 from previous projects and jobs, but I never installed the library myself. A simple `yarn add react-native-reanimated` from the project folder and `pod install` inside the `ios` folder and Reanimated was ready to use.
 
 The goal for this app is to be as easy and quick to use as possible. That being said, I don't want the app to look *too* basic. Having a simple loading animation along with a toast to pop up whenever a link is tapped are great touches to give users feedback on what the app is doing.
 
