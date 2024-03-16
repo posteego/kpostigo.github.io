@@ -1,5 +1,5 @@
 ---
-title: "Expanding the BeatBridge userbase"
+title: "Expanding the BeatBridge Userbase"
 summary: Rethinking BeatBridge from the user's perspective
 date: 2024-03-16
 draft: false
