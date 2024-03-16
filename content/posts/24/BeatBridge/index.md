@@ -1,8 +1,8 @@
 ---
 title: "Expanding the BeatBridge userbase"
 summary: Rethinking BeatBridge from the user's perspective
-date: 2024-03-01
-draft: true
+date: 2024-03-16
+draft: false
 tags: ["BeatBridge", "UX"]
 hidemeta: false
 hideFooter: true
@@ -24,16 +24,59 @@ Thankfully there are other options, and the quickest one to implement was using 
 
 In the case of `useState`, the app would need more UI components to simply display the new state, when ultimately the end result/action (opening the link to another app) is not that different from copying a link to the clipboard in the first place.
 
-Using `TouchableOpacity` for the buttons that list the available platforms, tapping on one would open the link on the user's phone, and long pressing would copy the link to the user's phone instead.
+Using `TouchableOpacity` for the buttons that list the available platforms, long pressing on one would open the link on the user's phone, and tapping would copy the link instead.
 
-![long press vid or short press vs long press demo]
-
-I have to see what tester's think of this implementation, but I also want to add a setting within the app that lets users select their preferred streaming platform so they get redirected automatically after pasting a link from a differing platform!
+I have to see what tester's think of this implementation, but I also want to add a setting within the app that lets users select their preferred streaming platform so they get redirected automatically after pasting a link from a differing platform.
 
 ### State Management Revisited
 
-I chose to use `react-native-mmkv-storage` and `zustand` for state management since both are lightweight and fast. 
+I chose to use `react-native-mmkv-storage` and `zustand` for state management since both are lightweight and fast. When putting the project together, I didn't realize that even though I set up mmkv correctly:
 
-## User Feedback Keeps Growing
+```js
+// mmkv.js
+import { MMKV } from "react-native-mmkv";
 
-There are still
+const storage = new MMKV({
+  id: 'song-storage',
+});
+
+export default mmkvStorage = {
+  setItem: (name, value) => (storage.set(name, value)),
+  getItem: (name) => (storage.getString(name) ?? null),
+  removeItem: (name) => (storage.delete(name)),
+};
+```
+
+```js
+// zustand-store.js
+import mmkvStorage from './mmkv';
+
+export default useStore = create(
+  persist(
+    (set) => ({
+      // key/val pairs
+      ...initialState,
+      // actions
+      update: ({ newState }) => set(() => ({ newState })),
+    }),
+    {
+      name: 'song-storage',
+      storage: createJSONStorage(() => mmkvStorage),
+    }
+  )
+);
+```
+
+The data types are different if accessing data directly from `mmkvStorage` compared to retrieving and updating state through `useStore`. It took me a moment to pinpoint the issue, which made me appreciate TypeScript a little bit...
+
+### Automating Links
+
+Now that state management is resolved, I added a dropdown in the About tab of the app to allow users to select their preferred platform. There is also a new button to reset the data cache.
+
+![About screen](./assets/aboutscreen.jpeg)
+
+![My dropdown in a neobrutalist style](./assets/dropdown.jpeg)
+
+BeatBridge is slowly approaching a completed state! As a result, I am making the beta open invite! Here is a link to access the app:
+
+[BeatBridge iOS Open Beta](https://testflight.apple.com/join/JSaQ32JQ)
