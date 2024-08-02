@@ -31,10 +31,10 @@ params:
     content: |
       hardware & software engineer
 
-      passionate about finance, food, fashion, music, and design.
+      passionate about technology, design, and culture.
 
   socialIcons:
     - name: github
-      url: https://github.com/yieldsimp
-    - name: twitter
-      url: https://twitter.com/postigo_txt
+      url: https://github.com/postig0x
+    # - name: twitter
+    #   url: https://twitter.com/postigo_txt
