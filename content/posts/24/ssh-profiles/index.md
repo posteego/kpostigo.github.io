@@ -66,7 +66,7 @@ For my personal Github account, I had global git config settings that I wanted t
   defaultBranch = main
 ```
 
-I realized that for my Kura Github account, I wanted to use a different name and email address, so I created a new file in my `~/.ssh` folder called `.gitconfig-kura` and added the following:
+I realized that for my Kura Github account, I wanted to use a different name and email address, so I created a new file called `~/.gitconfig-kura` and added the following:
 
 ```bash
 # .gitconfig-kura
