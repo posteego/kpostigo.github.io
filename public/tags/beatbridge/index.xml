@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>BeatBridge on postigo.fyi</title>
+    <link>http://localhost:1313/tags/beatbridge/</link>
+    <description>Recent content in BeatBridge on postigo.fyi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/beatbridge/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Expanding the BeatBridge Userbase</title>
+      <link>http://localhost:1313/posts/24/beatbridge/</link>
+      <pubDate>Sat, 16 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/24/beatbridge/</guid>
+      <description>Rethinking BeatBridge from the user&amp;rsquo;s perspective</description>
+    </item>
+    
+    <item>
+      <title>Renaming, Reanimated</title>
+      <link>http://localhost:1313/posts/24/musicshare/</link>
+      <pubDate>Fri, 01 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/24/musicshare/</guid>
+      <description>Renaming MusicShare and implementing Reanimated 3</description>
+    </item>
+    
+  </channel>
+</rss>

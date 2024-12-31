@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Expanding the BeatBridge Userbase | postigo.fyi</title>
+<meta name="keywords" content="BeatBridge, UX">
+<meta name="description" content="Rethinking BeatBridge from the user&rsquo;s perspective">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/24/beatbridge/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b488ca0d4b34c324f065c66855c12ce84ce12e34dd35edc9ebad7c112961e183.css" integrity="sha256-tIjKDUs0wyTwZcZoVcEs6EzhLjTdNe3J6618ESlh4YM=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/24/beatbridge/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="postigo.fyi (Alt + H)">postigo.fyi</a>
+            <div class="logo-switches">
+                <ul class="lang-switch"><li>|</li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Expanding the BeatBridge Userbase
+    </h1>
+    <div class="post-meta">&lt;span title=&#39;2024-03-16 00:00:00 &#43;0000 UTC&#39;&gt;March 16, 2024&lt;/span&gt;&amp;nbsp;·&amp;nbsp;3 min
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#beatbridge-needs-better-ux-for-users-receiving-music-links" aria-label="BeatBridge needs better UX for user&rsquo;s receiving music links">BeatBridge needs better UX for user&rsquo;s <em>receiving</em> music links</a><ul>
+                        
+                <li>
+                    <a href="#feature-implementation-idea" aria-label="Feature Implementation Idea">Feature Implementation Idea</a><ul>
+                        
+                <li>
+                    <a href="#reducing-unnecessary-complexity" aria-label="Reducing unnecessary complexity">Reducing unnecessary complexity</a></li></ul>
+                </li>
+                <li>
+                    <a href="#state-management-revisited" aria-label="State Management Revisited">State Management Revisited</a></li>
+                <li>
+                    <a href="#automating-links" aria-label="Automating Links">Automating Links</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>BeatBridge was originally designed from the perspective of trying to share a music link, so copying a new link to my clipboard made sense. However, as more people get their hands on it, it&rsquo;s clear there are still some problems that BeatBridge needs to resolve.</p>
+<h2 id="beatbridge-needs-better-ux-for-users-receiving-music-links">BeatBridge needs better UX for user&rsquo;s <em>receiving</em> music links<a hidden class="anchor" aria-hidden="true" href="#beatbridge-needs-better-ux-for-users-receiving-music-links">#</a></h2>
+<p>After user feedback, I learned that I needed to pay attention to users who receive links from others. In order to include them and make their lives easier with the app, I had to add a feature that would allow the user to open their preferred platform directly instead of copying a new link to their clipboard.</p>
+<h3 id="feature-implementation-idea">Feature Implementation Idea<a hidden class="anchor" aria-hidden="true" href="#feature-implementation-idea">#</a></h3>
+<p>My first reaction was to add a whole new app state, and allow the user to <em>toggle</em> between a <code>recieving</code> or <code>sharing</code> state but that made me cringe almost instantly. Even though it&rsquo;s useful to have tools like <code>useState</code>, it&rsquo;s easy to overuse them and cause bloat in your app.</p>
+<p>Thankfully there are other options, and the quickest one to implement was using the <code>onLongPress</code> callback function available within the <code>TouchableOpacity</code> component, which enables triggering an action by long pressing on a button.</p>
+<h4 id="reducing-unnecessary-complexity">Reducing unnecessary complexity<a hidden class="anchor" aria-hidden="true" href="#reducing-unnecessary-complexity">#</a></h4>
+<p>In the case of <code>useState</code>, the app would need more UI components to simply display the new state, when ultimately the end result/action (opening the link to another app) is not that different from copying a link to the clipboard in the first place.</p>
+<p>Using <code>TouchableOpacity</code> for the buttons that list the available platforms, long pressing on one would open the link on the user&rsquo;s phone, and tapping would copy the link instead.</p>
+<p>I have to see what tester&rsquo;s think of this implementation, but I also want to add a setting within the app that lets users select their preferred streaming platform so they get redirected automatically after pasting a link from a differing platform.</p>
+<h3 id="state-management-revisited">State Management Revisited<a hidden class="anchor" aria-hidden="true" href="#state-management-revisited">#</a></h3>
+<p>I chose to use <code>react-native-mmkv-storage</code> and <code>zustand</code> for state management since both are lightweight and fast. When putting the project together, I didn&rsquo;t realize that even though I set up mmkv correctly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// mmkv.js
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">MMKV</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;react-native-mmkv&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">storage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MMKV</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;song-storage&#39;</span>,
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">mmkvStorage</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setItem</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">value</span>) =&gt; (<span style="color:#a6e22e">storage</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">value</span>)),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">getItem</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">name</span>) =&gt; (<span style="color:#a6e22e">storage</span>.<span style="color:#a6e22e">getString</span>(<span style="color:#a6e22e">name</span>) <span style="color:#f92672">??</span> <span style="color:#66d9ef">null</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">removeItem</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">name</span>) =&gt; (<span style="color:#a6e22e">storage</span>.<span style="color:#66d9ef">delete</span>(<span style="color:#a6e22e">name</span>)),
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// zustand-store.js
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">mmkvStorage</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./mmkv&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">useStore</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">create</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">persist</span>(
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">set</span>) =&gt; ({
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// key/val pairs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      ...<span style="color:#a6e22e">initialState</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// actions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#a6e22e">update</span><span style="color:#f92672">:</span> ({ <span style="color:#a6e22e">newState</span> }) =&gt; <span style="color:#a6e22e">set</span>(() =&gt; ({ <span style="color:#a6e22e">newState</span> })),
+</span></span><span style="display:flex;"><span>    }),
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;song-storage&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">storage</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">createJSONStorage</span>(() =&gt; <span style="color:#a6e22e">mmkvStorage</span>),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>The data types are different if accessing data directly from <code>mmkvStorage</code> compared to retrieving and updating state through <code>useStore</code>. It took me a moment to pinpoint the issue, which made me appreciate TypeScript a little bit&hellip;</p>
+<h3 id="automating-links">Automating Links<a hidden class="anchor" aria-hidden="true" href="#automating-links">#</a></h3>
+<p>Now that state management is resolved, I added a dropdown in the About tab of the app to allow users to select their preferred platform. There is also a new button to reset the data cache.</p>
+<p><img loading="lazy" src="./assets/aboutscreen.jpeg" alt="About screen"  />
+</p>
+<p><img loading="lazy" src="./assets/dropdown.jpeg" alt="My dropdown in a neobrutalist style"  />
+</p>
+<p>BeatBridge is slowly approaching a completed state! As a result, I am making the beta open invite! Here is a link to access the app:</p>
+<p><a href="https://testflight.apple.com/join/JSaQ32JQ">BeatBridge iOS Open Beta</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/beatbridge/">BeatBridge</a></li>
+      <li><a href="http://localhost:1313/tags/ux/">UX</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on postigo.fyi</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on postigo.fyi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 31 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning Rust by Building a Github Analytics Tool</title>
+      <link>http://localhost:1313/posts/24/rust-pixel-tracker/</link>
+      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/24/rust-pixel-tracker/</guid>
+      <description>Exploring concepts like async programming, type safety, ownership, and SQL integrations in Rust</description>
+    </item>
+    
+    <item>
+      <title>Multiple SSH Profiles</title>
+      <link>http://localhost:1313/posts/24/ssh-profiles/</link>
+      <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/24/ssh-profiles/</guid>
+      <description>How to use multiple SSH profiles with SSH Config</description>
+    </item>
+    
+    <item>
+      <title>Expanding the BeatBridge Userbase</title>
+      <link>http://localhost:1313/posts/24/beatbridge/</link>
+      <pubDate>Sat, 16 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/24/beatbridge/</guid>
+      <description>Rethinking BeatBridge from the user&amp;rsquo;s perspective</description>
+    </item>
+    
+    <item>
+      <title>Renaming, Reanimated</title>
+      <link>http://localhost:1313/posts/24/musicshare/</link>
+      <pubDate>Fri, 01 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/24/musicshare/</guid>
+      <description>Renaming MusicShare and implementing Reanimated 3</description>
+    </item>
+    
+    <item>
+      <title>How ChatGPT is Supercharging My Seamless Music Sharing App</title>
+      <link>http://localhost:1313/posts/23/musicshare/</link>
+      <pubDate>Fri, 17 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/23/musicshare/</guid>
+      <description>GPT-4 can do some serious lifting</description>
+    </item>
+    
+  </channel>
+</rss>

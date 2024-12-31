@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>How ChatGPT is Supercharging My Seamless Music Sharing App | postigo.fyi</title>
+<meta name="keywords" content="ChatGPT, MusicShare">
+<meta name="description" content="GPT-4 can do some serious lifting">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/23/musicshare/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b488ca0d4b34c324f065c66855c12ce84ce12e34dd35edc9ebad7c112961e183.css" integrity="sha256-tIjKDUs0wyTwZcZoVcEs6EzhLjTdNe3J6618ESlh4YM=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/23/musicshare/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="postigo.fyi (Alt + H)">postigo.fyi</a>
+            <div class="logo-switches">
+                <ul class="lang-switch"><li>|</li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      How ChatGPT is Supercharging My Seamless Music Sharing App
+    </h1>
+    <div class="post-meta">&lt;span title=&#39;2023-03-17 00:00:00 &#43;0000 UTC&#39;&gt;March 17, 2023&lt;/span&gt;&amp;nbsp;·&amp;nbsp;7 min
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introduction" aria-label="Introduction">Introduction</a><ul>
+                        
+                <li>
+                    <a href="#introducing-musicshare-the-music-sharing-app" aria-label="Introducing MusicShare, the Music Sharing App">Introducing MusicShare, the Music Sharing App</a></li></ul>
+                </li>
+                <li>
+                    <a href="#collaborating-with-chatgpt-from-error-detection-to-component-creation" aria-label="Collaborating with ChatGPT: From Error Detection to Component Creation">Collaborating with ChatGPT: From Error Detection to Component Creation</a><ul>
+                        
+                <li>
+                    <a href="#priming-chatgpt-with-the-context-of-the-project" aria-label="Priming ChatGPT with the context of the project">Priming ChatGPT with the context of the project</a></li>
+                <li>
+                    <a href="#catching-errors-and-suggesting-improvements-with-chatgpt" aria-label="Catching errors and suggesting improvements with ChatGPT">Catching errors and suggesting improvements with ChatGPT</a></li>
+                <li>
+                    <a href="#building-a-modal-component-from-scratch" aria-label="Building a Modal component from scratch">Building a Modal component from scratch</a></li></ul>
+                </li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>If you haven&rsquo;t heard about ChatGPT yet, it&rsquo;s a state-of-the-art AI language
+model developed by OpenAI, based on the GPT-4 architecture.
+It has been making waves in the tech world lately for its impressive
+capabilities in understanding and generating human-like text.
+It can assist with a wide range of tasks, such as answering questions,
+writing emails, generating content, and even helping with code!</p>
+<p>After about a week of playing with this powerful language model, I figured
+I should see how it can help with projects I&rsquo;ve been working on.
+For this blog series, I&rsquo;ll be discussing my experience building a
+music sharing app that enables users to share links from one streaming service
+to another in a seamless way. The app aims to make sharing music links
+between different platforms as close to a one-tap experience as possible.</p>
+<p><em>All of the code provided was simplified for context</em></p>
+<h3 id="introducing-musicshare-the-music-sharing-app">Introducing MusicShare, the Music Sharing App<a hidden class="anchor" aria-hidden="true" href="#introducing-musicshare-the-music-sharing-app">#</a></h3>
+<p>Are you tired of the hassle of sharing music links between different
+streaming platforms? As music lovers, we know the frustration of wanting to
+share a song with a friend, only to find out that they&rsquo;re using a different
+music service than you. That&rsquo;s why I&rsquo;ve been working on an iOS app that makes
+sharing music links easier than ever.</p>
+<p>The app simplifies the process of converting music streaming links to links
+compatible with other popular services including Spotify, Apple Music, YouTube,
+Tidal, and more - all with just a few taps. The coolest and primary feature:
+the app will integrate seamlessly with your existing music apps!
+No need to launch the entire app - just select our app from the share prompt
+and our selection menu will appear.</p>
+<p>Under the hood, we&rsquo;re using React Native and custom native code written in
+Swift to leverage the iOS share extension in our app. Sorry Android users,
+maybe I&rsquo;ll make a custom Kotlin module in the future.</p>
+<p>Development is still in progress for the app, but throughout the process,
+ChatGPT has proven to be a truly unique and powerful tool, providing assistance
+in catching errors, suggesting improvements, and even building simple
+components.</p>
+<h2 id="collaborating-with-chatgpt-from-error-detection-to-component-creation">Collaborating with ChatGPT: From Error Detection to Component Creation<a hidden class="anchor" aria-hidden="true" href="#collaborating-with-chatgpt-from-error-detection-to-component-creation">#</a></h2>
+<h3 id="priming-chatgpt-with-the-context-of-the-project">Priming ChatGPT with the context of the project<a hidden class="anchor" aria-hidden="true" href="#priming-chatgpt-with-the-context-of-the-project">#</a></h3>
+<p>My objective was to give ChatGPT only what it needed to be able to provide me
+with useful responses:</p>
+<ul>
+<li>a description and goal of the project</li>
+<li>a custom React hook <code>useSongLink.js</code></li>
+<li>the main screen <code>Home.js</code></li>
+</ul>
+<h3 id="catching-errors-and-suggesting-improvements-with-chatgpt">Catching errors and suggesting improvements with ChatGPT<a hidden class="anchor" aria-hidden="true" href="#catching-errors-and-suggesting-improvements-with-chatgpt">#</a></h3>
+<p>With those inputs, ChatGPT quickly caught an oversight with how I set
+and reset the <code>loading</code> flag in my hook:</p>
+<blockquote>
+<p>Also, it&rsquo;s better to handle the loading state properly by
+updating it after the API call is completed.
+Here&rsquo;s an updated version of your hook:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// ...useSongLink hook
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fetchLink</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setLoading</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">apiUrl</span>, {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;follow&#39;</span>,
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setNewLink</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">url</span>);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">setError</span>(<span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;[useSongLink error]&#39;</span>, <span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">setLoading</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ...Rest of the hook code
+</span></span></span></code></pre></div><p>ChatGPT reminded me of the <code>finally</code> statement that comes with a <code>try-catch</code>,
+and helped me move my <code>setLoading(false)</code> method from being called <em>after</em>
+<code>fetchLinks()</code>.</p>
+<p>Another instance where ChatGPT proved helpful was in optimizing the hook.
+Initially, the hook would run as soon as the app launched, causing unnecessary
+fetches. ChatGPT suggested implementing a <code>requestFetch</code> method in the hook to
+prevent this from happening.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Before
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">useEffect</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">url</span>) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fetchLink</span>();
+</span></span><span style="display:flex;"><span>}, [<span style="color:#a6e22e">url</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">newLink</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">loading</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">error</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// After
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">fetchRequested</span>, <span style="color:#a6e22e">setFetchRequested</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">useEffect</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">fetchRequested</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">url</span>) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fetchLinks</span>();
+</span></span><span style="display:flex;"><span>}, [<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">fetchRequested</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">requestFetch</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setFetchRequested</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">newLink</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">loading</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">error</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">requestFetch</span>, <span style="color:#75715e">// where have I seen this before?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span></code></pre></div><p>Apollo GraphQL uses something similar to this idea, with <code>refetch</code>. I hadn&rsquo;t
+thought about ways of using the concept, but ChatGPT spelled it out for me,
+literally, and helped me learn of a new technique painlessly!</p>
+<h3 id="building-a-modal-component-from-scratch">Building a Modal component from scratch<a hidden class="anchor" aria-hidden="true" href="#building-a-modal-component-from-scratch">#</a></h3>
+<p><img loading="lazy" src="images/IMG_5341.PNG" alt="homescreen"  />
+</p>
+<p>Before ChatGPT, my home screen had a placeholder list (it&rsquo;s still a placeholder)
+and a button that would run the API and log the new URL to the console.
+The platform was fixed to Youtube, since I was using Spotify as the initial
+links. I figured that this was a good moment to see how it would handle a
+task to create something new, so I asked it to build a modal with the available
+platforms so that the user can select what platform to conver the link to.
+ChatGPT quickly got to work, creating icon names using Ionicon&rsquo;s convention,
+and building out a transparent modal with a scrollview that was glued to the
+left side of the screen. I was unhappy with the result, so I gave it a kick in
+the butt:</p>
+<blockquote>
+<p>Me: Can you display the available platforms modal as a centered grid optimized
+for user experience instead of a ScrollView?</p>
+</blockquote>
+<blockquote>
+<p>GPT: Certainly!</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#75715e">// other imports and definitions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// note: GPT **did** give me correct imports
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Home</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ... (other state variables and functions)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">renderPlatform</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">platform</span>) =&gt; (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">TouchableOpacity</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">platform</span>} <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">platformContainer</span>} <span style="color:#a6e22e">onPress</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">handlePlatformSelect</span>(<span style="color:#a6e22e">platform</span>)}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Icon</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">platformIcons</span>[<span style="color:#a6e22e">platform</span>]} <span style="color:#a6e22e">size</span><span style="color:#f92672">=</span>{<span style="color:#ae81ff">48</span>} <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">platformIcon</span>} /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Text</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">platformText</span>}&gt;{<span style="color:#a6e22e">platform</span>}&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">TouchableOpacity</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">container</span>}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Modal</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">animationType</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;slide&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">transparent</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">visible</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">modalVisible</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">onRequestClose</span><span style="color:#f92672">=</span>{() =&gt; { <span style="color:#a6e22e">setModalVisible</span>(<span style="color:#66d9ef">false</span>); }}
+</span></span><span style="display:flex;"><span>      &gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">modalBackground</span>}&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">modalContent</span>}&gt;
+</span></span><span style="display:flex;"><span>            {<span style="color:#a6e22e">PLATFORMS</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">renderPlatform</span>)}
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">Modal</span>&gt;
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// ... (other components and elements)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>It worked! To add icing to the cake, GPT even named it&rsquo;s own styles and
+provided the CSS for them:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// ... (other styles)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">modalBackground</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">flex</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;rgba(0, 0, 0, 0.5)&#39;</span>,
+</span></span><span style="display:flex;"><span>},
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">modalContent</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">flexWrap</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;wrap&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">flexDirection</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;row&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;white&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">borderRadius</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">padding</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;80%&#39;</span>,
+</span></span><span style="display:flex;"><span>},
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">platformContainer</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;50%&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">padding</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>},
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">platformIcon</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">marginBottom</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>},
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">platformText</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">14</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">textAlign</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>},
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ... (other styles)
+</span></span></span></code></pre></div><p>I cleaned up the styles by replacing the <code>width</code> fields with <code>margin</code> and
+removing the percentages. The result:
+<img loading="lazy" src="images/IMG_5339.PNG" alt="gridGPT"  />
+</p>
+<p>Obviously this isn&rsquo;t the final product, but for a quick build and test, this
+was pretty painless! GPT-4 even added a little alert to let the user know that
+the new URL was copied to their clipboard:
+<img loading="lazy" src="images/IMG_5340.PNG" alt="alertGPT"  />
+</p>
+<p>ChatGPT completed the result by giving me additional code to implement a new
+parameter <code>selectedPlatform</code> to the <code>useSongLink</code> hook, effectively adding
+new functionality to my project from a series of prompts.</p>
+<p>The <code>useSongLink</code> hook now generates the appropriate music platform
+link <em>dynamically</em> based on the user&rsquo;s selection in the Home component&rsquo;s Modal.
+This seamless integration between the Home component and the useSongLink hook
+showcases ChatGPT&rsquo;s ability to work with existing code
+and provide meaningful enhancements.</p>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>Throughout the enhancement of this music sharing project (still in progress),
+ChatGPT has proven to be a killer developer&rsquo;s tool, assisting in
+error detection, code optimization, and component creation.</p>
+<p>I don&rsquo;t think GPT-4 is ready to take a developer&rsquo;s job just yet, but it is
+definitely a resource that all developer&rsquo;s should learn to master in order
+to be more efficient and effective, and learn best&ndash;or new&ndash;practices.</p>
+<p>I look forward to sharing more about my journey working on this project
+and the role ChatGPT plays in refining and enhancing my work.</p>
+<p>The latest trends and buzzworthy ideas aren&rsquo;t always
+the best indicators of a project&rsquo;s potential impact.
+That&rsquo;s why this app focuses on making sharing music links easier and
+more accessible for all music lovers, regardless of the platform they use.
+So if you&rsquo;re tired of the hassle of switching between different music services
+just to share a song, I hope you give my app a try when it&rsquo;s released. If
+you&rsquo;re interested in trying out the beta version of the app, feel free to reach
+out and I will let you know when it&rsquo;s available.</p>
+<p><strong>PS:</strong> <em>MusicShare</em> is the placeholder name of the project,
+but ChatGPT has already given me great ideas,
+let me know which one you like best:</p>
+<ul>
+<li>SoundBridge</li>
+<li>TuneSwitch</li>
+<li>MelodyMerge</li>
+<li>HarmonyLink</li>
+<li>RhythmRoute</li>
+<li>SongSyncer</li>
+<li>TrackTraverse</li>
+<li>BeatBridge</li>
+<li>AudioAtlas</li>
+<li>MelodyMingle</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/chatgpt/">ChatGPT</a></li>
+      <li><a href="http://localhost:1313/tags/musicshare/">MusicShare</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+</body>
+
+</html>

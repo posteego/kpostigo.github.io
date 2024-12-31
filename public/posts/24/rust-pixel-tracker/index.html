@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Learning Rust by Building a Github Analytics Tool | postigo.fyi</title>
+<meta name="keywords" content="Rust, Backend, Actix Web, SQLite">
+<meta name="description" content="Exploring concepts like async programming, type safety, ownership, and SQL integrations in Rust">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/24/rust-pixel-tracker/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b488ca0d4b34c324f065c66855c12ce84ce12e34dd35edc9ebad7c112961e183.css" integrity="sha256-tIjKDUs0wyTwZcZoVcEs6EzhLjTdNe3J6618ESlh4YM=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/24/rust-pixel-tracker/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="postigo.fyi (Alt + H)">postigo.fyi</a>
+            <div class="logo-switches">
+                <ul class="lang-switch"><li>|</li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Learning Rust by Building a Github Analytics Tool
+    </h1>
+    <div class="post-meta">&lt;span title=&#39;2024-12-31 00:00:00 &#43;0000 UTC&#39;&gt;December 31, 2024&lt;/span&gt;&amp;nbsp;·&amp;nbsp;4 min
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#why-rust" aria-label="Why Rust?">Why Rust?</a></li>
+                <li>
+                    <a href="#the-project-github-profile-analytics" aria-label="The Project: GitHub Profile Analytics">The Project: GitHub Profile Analytics</a><ul>
+                        
+                <li>
+                    <a href="#system-architecture" aria-label="System Architecture">System Architecture</a></li>
+                <li>
+                    <a href="#core-components" aria-label="Core Components">Core Components</a></li>
+                <li>
+                    <a href="#learning-points" aria-label="Learning Points">Learning Points</a></li></ul>
+                </li>
+                <li>
+                    <a href="#technical-challenges" aria-label="Technical Challenges">Technical Challenges</a></li>
+                <li>
+                    <a href="#future-improvements" aria-label="Future Improvements">Future Improvements</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>I recently completed an online training academy called Kura Labs, which is focused on teaching Cloud Infrastructure. In the coming weeks I will share a writeup of my experience building the final project for the program after cleaning up some code and adding more documentation.</p>
+<p>In the meantime, I used my break after Kura to dive into Rust by building <em>Pulse</em> - a lightweight analytics tool that tracks views on GitHub profiles. Here&rsquo;s what I learned along the way.</p>
+<h2 id="why-rust">Why Rust?<a hidden class="anchor" aria-hidden="true" href="#why-rust">#</a></h2>
+<p>After years of working with various languages from Javascript and Python to C/C++ for embedded systems, Rust caught my attention for its promise of memory safety without sacrificing performance. Coming from an electrical engineering background where efficiency matters, I appreciated Rust&rsquo;s zero-cost abstractions.</p>
+<p>Building a web application in Rust is a great way to get familiar with the language and its ecosystem, since web frameworks like Actix Web can abstract away many of the low-level details of web development. I chose to use Actix Web over Rocket because Actix Web also exposes low-level implementations for customizations, making it a good choice for a verstatile framework in a new language.</p>
+<h2 id="the-project-github-profile-analytics">The Project: GitHub Profile Analytics<a hidden class="anchor" aria-hidden="true" href="#the-project-github-profile-analytics">#</a></h2>
+<p>The concept is simple: track the views on my personal Github profile using a 1x1 transparent GIF pixel.</p>
+<p>Pulse uses Actix Web and an async Rust library called SQLx for database interactions. Most of the heavy lifting for async programming is handled by Tokio, which is a dependency of Actix Web and SQLx. The project is structured into three main components: the main application, the database schema, and the analytics API.</p>
+<h3 id="system-architecture">System Architecture<a hidden class="anchor" aria-hidden="true" href="#system-architecture">#</a></h3>
+<p><img loading="lazy" src="./assets/pixel-arch.png" alt="architecture"  />
+</p>
+<h3 id="core-components">Core Components<a hidden class="anchor" aria-hidden="true" href="#core-components">#</a></h3>
+<ol>
+<li>
+<p>Tracking Endpoint (<code>/pixel.gif</code>): A simple endpoint that serves a transparent GIF while logging visitor data to the database. The endpoint is protected by a simple request validation system. It checks the <code>User-Agent</code> header to ensure the request is coming from GitHub&rsquo;s Camo proxy system, which Github uses to serve images in Markdown files, to protect users and prevent abuse.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">#[get(</span><span style="color:#e6db74">&#34;/pixel.gif&#34;</span><span style="color:#75715e">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">pixel</span>(req: <span style="color:#a6e22e">HttpRequest</span>, state: <span style="color:#a6e22e">web</span>::Data<span style="color:#f92672">&lt;</span>AppState<span style="color:#f92672">&gt;</span>) -&gt; Result<span style="color:#f92672">&lt;</span>HttpResponse<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> user_agent <span style="color:#f92672">=</span> req
+</span></span><span style="display:flex;"><span>        .headers()
+</span></span><span style="display:flex;"><span>        .get(<span style="color:#e6db74">&#34;User-Agent&#34;</span>)
+</span></span><span style="display:flex;"><span>        .and_then(<span style="color:#f92672">|</span>h<span style="color:#f92672">|</span> h.to_str().ok())
+</span></span><span style="display:flex;"><span>        .unwrap_or(<span style="color:#e6db74">&#34;unknown&#34;</span>)
+</span></span><span style="display:flex;"><span>        .to_string();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Validate GitHub Camo requests
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> is_github_request <span style="color:#f92672">=</span> user_agent.contains(<span style="color:#e6db74">&#34;github-camo&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">!</span>is_github_request {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Ok(HttpResponse::Forbidden().finish());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... existing code ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
+<li>
+<p>Analytics API: A <code>/stats</code> endpoint that aggregates view statistics with SQL queries:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">#[derive(Serialize)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Stats</span> {
+</span></span><span style="display:flex;"><span>    total_views: <span style="color:#66d9ef">i64</span>,
+</span></span><span style="display:flex;"><span>    views_today: <span style="color:#66d9ef">i64</span>,
+</span></span><span style="display:flex;"><span>    views_this_week: <span style="color:#66d9ef">i64</span>,
+</span></span><span style="display:flex;"><span>    recent_views: Vec<span style="color:#f92672">&lt;</span>ViewLog<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>Database: A simple SQLite database that stores the pixel hits:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> pixel_hits (
+</span></span><span style="display:flex;"><span>  id INTEGER <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> AUTOINCREMENT,
+</span></span><span style="display:flex;"><span>  ip_address TEXT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>  user_agent TEXT,
+</span></span><span style="display:flex;"><span>  camo_id TEXT,
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">timestamp</span> DATETIME <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="learning-points">Learning Points<a hidden class="anchor" aria-hidden="true" href="#learning-points">#</a></h3>
+<ol>
+<li>
+<p>Async Rust: Coming from JavaScript/TypeScript in my web development work, Rust&rsquo;s async system was interesting. The explicit handling of futures and async/await syntax felt more controlled than JavaScript&rsquo;s event loop, which may feel less deterministic.</p>
+</li>
+<li>
+<p>Type System: After working with TypeScript extensively in mobile development, Rust&rsquo;s type system felt familiar yet more robust. The compiler&rsquo;s error messages were surprisingly helpful in understanding ownership concepts. The &lsquo;&amp;&rsquo; operator expresses a reference to a value, which is similar to pointers in C/C++.</p>
+</li>
+<li>
+<p>SQL with Safety: Using SQLx provided a nice balance between raw SQL and type safety:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> total_views: <span style="color:#66d9ef">i64</span> <span style="color:#f92672">=</span> sqlx::query!(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;SELECT COUNT(*) AS count FROM pixel_hits&#34;</span> 
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>    .fetch_one(<span style="color:#f92672">&amp;</span>state.db)
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">await</span><span style="color:#f92672">?</span>
+</span></span><span style="display:flex;"><span>    .count
+</span></span><span style="display:flex;"><span>    .into();
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="technical-challenges">Technical Challenges<a hidden class="anchor" aria-hidden="true" href="#technical-challenges">#</a></h2>
+<ol>
+<li>
+<p>Request Validation: Implementing proper request validation was crucial. Instead of switching focus to another project, I focused on GitHub&rsquo;s Camo proxy system after learning that I can&rsquo;t track a user&rsquo;s IP address directly. The <code>User-Agent</code> header is a common way to identify a request&rsquo;s source:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;user-agent&#34;</span>: <span style="color:#e6db74">&#34;github-camo (&lt;hash&gt;)&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;via&#34;</span>: <span style="color:#e6db74">&#34;HTTP/1.1 github-camo (&lt;hash&gt;)&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;x-forwarded-proto&#34;</span>: <span style="color:#e6db74">&#34;https&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>Github Camo Proxy: Although I was able to validate the request, I am unable to ensure that this server would not be abused by malicious actors. The headers in the request can be spoofed if no authentication is required, and authentication is virtually impossible to implement if there is no way to store hidden variables in the Github Profile. The URL is in plaintext in a markdown file, so any tokens or secrets can be easily extracted.</p>
+</li>
+<li>
+<p>Documentation while learning: Having an ideal developer workflow is an ongoing process, so using this blog is a great way to document my learnings and progress. I am looking for ways to incorporate tangential actions into my documentation, especially my git commit history, as that can be a useful reference for writing future posts.</p>
+</li>
+</ol>
+<h2 id="future-improvements">Future Improvements<a hidden class="anchor" aria-hidden="true" href="#future-improvements">#</a></h2>
+<p>As a proof of concept, there&rsquo;s room for enhancement:</p>
+<ul>
+<li>Rate limiting implementation</li>
+<li>Using handlers to allow for more flexibility in the API (more github users, etc)</li>
+<li>Geographic distribution analysis of Camo proxies</li>
+<li>Comprehensive test suite</li>
+<li>Authentication system for non-GitHub usage</li>
+</ul>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>This project was an excellent way to learn Rust while building something practical. Although simple, I was able to experiment with a variety of Rust concepts and libraries, and I learned a lot about the language and its ecosystem. The source code is available on my GitHub, and I welcome feedback from fellow engineers interested in Rust or analytics systems.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/rust/">Rust</a></li>
+      <li><a href="http://localhost:1313/tags/backend/">Backend</a></li>
+      <li><a href="http://localhost:1313/tags/actix-web/">Actix Web</a></li>
+      <li><a href="http://localhost:1313/tags/sqlite/">SQLite</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+</body>
+
+</html>
