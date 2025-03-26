@@ -1,1 +1,1 @@
-# kpostigo.github.io (postigo.fyi)
+# postigo.fyi
